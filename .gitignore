@@ -1,3 +1,5 @@
+#Template ignores
+
 core.Microsoft*
 core.mongo*
 core.python*
@@ -7,3 +9,29 @@ __pycache__/
 node_modules/
 .github/
 cloudinary_python.txt
+
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+
+# Virtual environments
+env/
+venv/
+ENV/
+.venv/
+
+# Environment variable files
+.env
+env.py
+
+# Django stuff
+*.sqlite3
+db.sqlite3
+staticfiles/
+
+# IDEs and editors
+.vscode/
+.idea/
+
+# macOS
+.DS_Store
