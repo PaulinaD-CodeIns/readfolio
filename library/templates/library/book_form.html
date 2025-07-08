@@ -1,3 +1,9 @@
+{% extends "base.html" %}
+
+
+{% block content %}
+
+
 <h1>Add Book</h1>
 <form method="post">
   {% csrf_token %}
@@ -14,3 +20,6 @@
   <button type="submit">Add Book</button>
 </form>
 <a href="{% url 'book_list' %}">Back to list</a>
+
+
+{% endblock %}

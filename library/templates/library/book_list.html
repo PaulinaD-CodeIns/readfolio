@@ -1,3 +1,9 @@
+{% extends "base.html" %}
+
+
+{% block content %}
+
+
 <h1>My Book List</h1>
 <a href="{% url 'book_create' %}">Add New Book</a>
 <ul>
@@ -9,3 +15,6 @@
     <li>No books yet.</li>
   {% endfor %}
 </ul>
+
+
+{% endblock %}
