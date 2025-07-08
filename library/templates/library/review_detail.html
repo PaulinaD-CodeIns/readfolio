@@ -1,15 +1,17 @@
 {% extends 'base.html' %}
 
+
 {% block content %}
-  <h2>Review for: {{ review.book.title }}</h2>
-  <p><strong>By:</strong> {{ review.user }}</p>
-  <p><strong>Rating:</strong> {{ review.rating }}</p>
-  <p><strong>Content:</strong> {{ review.content }}</p>
-  <p><strong>Visibility:</strong>
-    {% if review.is_public %}
-      <span style="color: green;">Public</span>
-    {% else %}
-      <span style="color: red;">Private</span>
-    {% endif %}
-  </p>
+<h2>Review for "{{ review.book.title }}"</h2>
+
+<p><strong>Rating:</strong> {{ review.rating }} / 5</p>
+<p><strong>Review:</strong> {{ review.content }}</p>
+<p><strong>Visibility:</strong> {{ review.is_public|yesno:"Public,Private" }}</p>
+
+{% if review.user == request.user %}
+<a href="{% url 'review_update' review.pk %}">Edit Review</a> |
+<a href="{% url 'review_delete' review.pk %}">Delete Review</a>
+{% endif %}
+
+<a href="{% url 'review_list' %}">Back to all reviews</a>
 {% endblock %}
