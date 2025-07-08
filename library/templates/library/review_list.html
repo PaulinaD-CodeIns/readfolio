@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <h2>My Reviews</h2>
+  {% if reviews %}
+    <ul>
+      {% for review in reviews %}
+        <li>
+          <strong>{{ review.book.title }}</strong><br>
+          Rating: {{ review.rating }}<br>
+          {{ review.text|linebreaks }}<br>
+          {% if review.public %}<em>Public</em>{% else %}<em>Private</em>{% endif %}
+        </li>
+      {% endfor %}
+    </ul>
+  {% else %}
+    <p>You haven't written any reviews yet.</p>
+  {% endif %}
+{% endblock %}
