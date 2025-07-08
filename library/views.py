@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import get_object_or_404
 from .models import Book, Review
-from .forms import ReviewForm
+from .forms import ReviewForm, BookForm
 
 
 # Book CRUD, list, and details 
@@ -14,17 +14,20 @@ def book_list(request):
     books = Book.objects.filter(user=request.user)
     return render(request, 'library/book_list.html', {'books': books})
 
+
 # Book CRUD: Create
 @login_required
 def book_create(request):
     if request.method == 'POST':
-        title = request.POST.get('title')
-        author = request.POST.get('author')
-        status = request.POST.get('status')
-        if title and author and status:
-            Book.objects.create(title=title, author=author, status=status, user=request.user)
+        form = BookForm(request.POST)
+        if form.is_valid():
+            book = form.save(commit=False)
+            book.user = request.user
+            book.save()
             return redirect('book_list')
-    return render(request, 'library/book_form.html')
+    else:
+        form = BookForm()
+    return render(request, 'library/book_form.html', {'form': form})
 
 # Book CRUD: Read
 @login_required
@@ -38,17 +41,19 @@ def book_detail(request, pk):
 
 # Book CRUD: Update
 @login_required
+
 def book_update(request, pk):
-    book = Book.objects.get(pk=pk, user=request.user)
+    book = get_object_or_404(Book, pk=pk, user=request.user)
 
     if request.method == 'POST':
-        book.title = request.POST.get('title')
-        book.author = request.POST.get('author')
-        book.status = request.POST.get('status')
-        book.save()
-        return redirect('book_list')
+        form = BookForm(request.POST, instance=book)
+        if form.is_valid():
+            form.save()
+            return redirect('book_list')
+    else:
+        form = BookForm(instance=book)
 
-    return render(request, 'library/book_form.html', {'book': book})
+    return render(request, 'library/book_form.html', {'form': form})
 
 # Book CRUD: Delete
 @login_required
@@ -74,11 +79,8 @@ def review_list(request):
 
 # Review CRUD: Create
 @login_required
-def create_review(request, book_id):
-    book = get_object_or_404(Book, id=book_id, user=request.user)
-
-    if book.status != 'Finished':
-        return redirect('book_detail', pk=book_id)
+def create_review(request, pk):
+    book = get_object_or_404(Book, pk=pk, user=request.user)
 
     if request.method == 'POST':
         form = ReviewForm(request.POST)
@@ -87,7 +89,7 @@ def create_review(request, book_id):
             review.book = book
             review.user = request.user
             review.save()
-            return redirect('review_detail', pk=review.pk)
+            return redirect('book_list')
     else:
         form = ReviewForm()
 

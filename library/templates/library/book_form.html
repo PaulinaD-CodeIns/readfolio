@@ -1,22 +1,21 @@
 {% extends "base.html" %}
 
-
 {% block content %}
+  <h1>{{ form.instance.pk|yesno:"Edit Book,Add Book" }}</h1>
 
+  <form method="post">
+    {% csrf_token %}
+    {% for field in form %}
+      <div style="margin-bottom: 10px;">
+        {{ field.label_tag }}
+        {{ field }}
+        {% if field.errors %}
+          <div style="color: red;">{{ field.errors }}</div>
+        {% endif %}
+      </div>
+    {% endfor %}
+    <button type="submit">Save</button>
+  </form>
 
-<h1>Add Book</h1>
-<form method="post">
-  {% csrf_token %}
-  <input type="text" name="title" placeholder="Title" value="{{ book.title|default:'' }}">
-  <input type="text" name="author" placeholder="Author" value="{{ book.author|default:'' }}">
-  <select name="status">
-    <option value="To Read" {% if book.status == "To Read" %}selected{% endif %}>To Read</option>
-    <option value="Reading" {% if book.status == "Reading" %}selected{% endif %}>Reading</option>
-    <option value="Finished" {% if book.status == "Finished" %}selected{% endif %}>Finished</option>
-  </select>
-  <button type="submit">Save</button>
-</form>
-<a href="{% url 'book_list' %}">Back to list</a>
-
-
+  <a href="{% url 'book_list' %}">Back to list</a>
 {% endblock %}

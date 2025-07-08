@@ -1,9 +1,19 @@
-{% extends 'base.html' %}
+{% extends "base.html" %}
+
 {% block content %}
   <h2>Review: {{ book.title }}</h2>
   <form method="post">
     {% csrf_token %}
-    {{ form.as_p }}
+    {% for field in form %}
+      <div style="margin-bottom: 10px;">
+        {{ field.label_tag }}
+        {{ field }}
+        {% if field.errors %}
+          <div style="color: red;">{{ field.errors }}</div>
+        {% endif %}
+      </div>
+    {% endfor %}
     <button type="submit">Submit Review</button>
   </form>
+  <a href="{% url 'book_list' %}">Back to list</a>
 {% endblock %}
