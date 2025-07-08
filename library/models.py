@@ -6,14 +6,19 @@ from django.contrib.auth.models import User
 
 # Book Model -- 
 class Book(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='books')
-    title = models.CharField(max_length=200)
-    author = models.CharField(max_length=200)
-    date_added = models.DateTimeField(auto_now_add=True)
-    finished = models.BooleanField(default=False)
+    STATUS_CHOICES = [
+        ('to_read', 'To Read'),
+        ('reading', 'Reading'),
+        ('finished', 'Finished'),
+    ]
+
+    title = models.CharField(max_length=255)
+    author = models.CharField(max_length=255)
+    status = models.CharField(max_length=20, choices=STATUS_CHOICES, default='to_read')
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
 
     def __str__(self):
-        return f"{self.title} by {self.author}"
+        return self.title
 
 
 

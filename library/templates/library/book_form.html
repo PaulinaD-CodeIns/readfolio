@@ -1,0 +1,16 @@
+<h1>Add Book</h1>
+<form method="post">
+  {% csrf_token %}
+  <label>Title:</label><br>
+  <input type="text" name="title"><br><br>
+  <label>Author:</label><br>
+  <input type="text" name="author"><br><br>
+  <label>Status:</label><br>
+  <select name="status">
+    <option value="to_read">To Read</option>
+    <option value="reading">Reading</option>
+    <option value="finished">Finished</option>
+  </select><br><br>
+  <button type="submit">Add Book</button>
+</form>
+<a href="{% url 'book_list' %}">Back to list</a>
