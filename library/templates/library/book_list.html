@@ -10,6 +10,9 @@
   {% for book in books %}
     <li>
       <a href="{% url 'book_detail' book.pk %}">{{ book.title }}</a> - {{ book.status }}
+      <a href="{% url 'book_update' book.pk %}">Edit</a>
+      <a href="{% url 'book_delete' book.pk %}">Delete</a>
+
     </li>
   {% empty %}
     <li>No books yet.</li>
