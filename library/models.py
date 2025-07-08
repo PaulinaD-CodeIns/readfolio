@@ -25,11 +25,15 @@ class Book(models.Model):
 # Review Model --
 
 class Review(models.Model):
-    book = models.ForeignKey(Book, on_delete=models.CASCADE, related_name='reviews')
-    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='reviews')
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    book = models.ForeignKey(Book, on_delete=models.CASCADE)
     content = models.TextField()
+    rating = models.PositiveSmallIntegerField()
+    is_public = models.BooleanField(default=False)
     created_at = models.DateTimeField(auto_now_add=True)
-    public = models.BooleanField(default=False)
+
+    class Meta:
+        unique_together = ('user', 'book')  # Sets one review per book
 
     def __str__(self):
-        return f"Review of '{self.book.title}' by {self.user.username}"
+        return f"{self.user} - {self.book.title}"

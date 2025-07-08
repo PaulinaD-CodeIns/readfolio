@@ -1,6 +1,8 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
+from django.shortcuts import get_object_or_404
 from .models import Book, Review
+from .forms import ReviewForm
 
 
 # Book CRUD, list, and details
@@ -60,3 +62,27 @@ def book_delete(request, pk):
 def review_list(request):
     reviews = Review.objects.filter(user=request.user)
     return render(request, 'library/review_list.html', {'reviews': reviews})
+
+
+@login_required
+def create_review(request, book_id):
+    book = get_object_or_404(Book, id=book_id, user=request.user)
+
+    if book.status != "Finished":
+        return redirect('book_list') 
+
+    if Review.objects.filter(book=book, user=request.user).exists():
+        return redirect('book_list')  # Prevents multiple reviews
+
+    if request.method == 'POST':
+        form = ReviewForm(request.POST)
+        if form.is_valid():
+            review = form.save(commit=False)
+            review.book = book
+            review.user = request.user
+            review.save()
+            return redirect('review_list')
+    else:
+        form = ReviewForm()
+
+    return render(request, 'library/review_form.html', {'form': form, 'book': book})

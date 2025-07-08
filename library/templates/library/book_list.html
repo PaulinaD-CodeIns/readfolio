@@ -8,14 +8,18 @@
 <a href="{% url 'book_create' %}">Add New Book</a>
 <ul>
   {% for book in books %}
-    <li>
-      <a href="{% url 'book_detail' book.pk %}">{{ book.title }}</a> - {{ book.status }}
-      <a href="{% url 'book_update' book.pk %}">Edit</a>
-      <a href="{% url 'book_delete' book.pk %}">Delete</a>
+  <li>
+    <a href="{% url 'book_detail' book.pk %}">{{ book.title }}</a> - {{ book.status }}
+    <a href="{% url 'book_update' book.pk %}">Edit</a>
+    <a href="{% url 'book_delete' book.pk %}">Delete</a>
 
-    </li>
+    {% if book.status == "Finished" and not book.review_set.exists %}
+    <a href="{% url 'create_review' book.id %}">Review</a>
+    {% endif %}
+
+  </li>
   {% empty %}
-    <li>No books yet.</li>
+  <li>No books yet.</li>
   {% endfor %}
 </ul>
 
