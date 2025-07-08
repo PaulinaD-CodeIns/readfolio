@@ -1,9 +1,26 @@
 {% extends 'base.html' %}
+
 {% block content %}
   <h2>Review: {{ book.title }}</h2>
+
   <form method="post">
     {% csrf_token %}
-    {{ form.as_p }}
+
+    <div>
+      <label for="id_content">Content:</label>
+      {{ form.content }}
+    </div>
+
+    <div>
+      <label for="id_rating">Rating:</label>
+      {{ form.rating }}
+    </div>
+
+    <div>
+      <label for="id_is_public">Make Public?</label>
+      {{ form.is_public }}
+    </div>
+
     <button type="submit">Submit Review</button>
   </form>
 {% endblock %}

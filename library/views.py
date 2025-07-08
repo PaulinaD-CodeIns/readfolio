@@ -68,11 +68,8 @@ def review_list(request):
 def create_review(request, book_id):
     book = get_object_or_404(Book, id=book_id, user=request.user)
 
-    if book.status != "Finished":
-        return redirect('book_list') 
-
-    if Review.objects.filter(book=book, user=request.user).exists():
-        return redirect('book_list')  # Prevents multiple reviews
+    if book.status != 'Finished':
+        return redirect('book_detail', pk=book_id)
 
     if request.method == 'POST':
         form = ReviewForm(request.POST)
@@ -81,8 +78,15 @@ def create_review(request, book_id):
             review.book = book
             review.user = request.user
             review.save()
-            return redirect('review_list')
+            return redirect('review_detail', pk=review.pk)
     else:
         form = ReviewForm()
 
     return render(request, 'library/review_form.html', {'form': form, 'book': book})
+
+
+
+@login_required
+def review_detail(request, pk):
+    review = get_object_or_404(Review, pk=pk)
+    return render(request, 'library/review_detail.html', {'review': review})
