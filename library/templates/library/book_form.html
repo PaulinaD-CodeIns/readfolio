@@ -1,21 +1,31 @@
 {% extends "base.html" %}
 
 {% block content %}
-  <h1>{{ form.instance.pk|yesno:"Edit Book,Add Book" }}</h1>
+<div class="container d-flex justify-content-center align-items-center" style="min-height: 80vh;">
+  <div class="col-md-8 p-5 shadow rounded" style="background-color: #fbfdfe;">
+    <h2 class="text-center mb-4" style="font-family: 'Quicksand', sans-serif; font-weight: bold;">Add or Edit a Book
+    </h2>
 
-  <form method="post">
-    {% csrf_token %}
-    {% for field in form %}
-      <div style="margin-bottom: 10px;">
+    <form method="POST">
+      {% csrf_token %}
+      {% for field in form %}
+      <div class="mb-3">
         {{ field.label_tag }}
         {{ field }}
         {% if field.errors %}
-          <div style="color: red;">{{ field.errors }}</div>
+        <div class="text-danger small">{{ field.errors }}</div>
         {% endif %}
       </div>
-    {% endfor %}
-    <button type="submit">Save</button>
-  </form>
-
-  <a href="{% url 'book_list' %}">Back to list</a>
+      {% endfor %}
+      <div class="d-flex justify-content-between mt-4">
+        <a href="{% url 'book_list' %}" class="btn btn-sm" style="background-color: #5e17eb; color: white;">
+          ← Back to List
+        </a>
+        <button type="submit" class="btn" style="background-color: #5e17eb; color: white;">
+          Save
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
 {% endblock %}

@@ -26,15 +26,8 @@ class BookForm(forms.ModelForm):
         model = Book
         fields = ['title', 'author', 'status']
         widgets = {
-            'title': forms.TextInput(attrs={
-                'required': True,
-                'placeholder': 'Book Title'
-            }),
-            'author': forms.TextInput(attrs={
-                'required': True,
-                'placeholder': 'Author Name'
-            }),
-            'status': forms.Select(attrs={
-                'required': True
-            }),
+            'title': forms.TextInput(attrs={'class': 'form-control'}),
+            'author': forms.TextInput(attrs={'class': 'form-control'}),
+            'status': forms.Select(attrs={'class': 'form-select'}),
         }
+
