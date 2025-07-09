@@ -4,79 +4,105 @@
 <head>
   <meta charset="UTF-8">
   <title>ReadFolio</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Bootstrap & Fonts -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
   <link rel="stylesheet" href="/static/css/style.css">
-  <link href="https://fonts.googleapis.com/css2?family=Quicksand&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
-
+  <link href="https://fonts.googleapis.com/css2?family=Quicksand&family=Roboto:wght@400;700&display=swap"
+    rel="stylesheet">
+  <link rel="icon" type="image/x-icon" href="/static/images/favicon_io/favicon-16x16.png">
 </head>
 
 <body>
 
-  <nav class="navbar navbar-expand-lg custom-navbar px-4">
+  <!-- Responsive Navbar -->
+  <nav class="navbar navbar-expand-lg custom-navbar px-3 px-md-4">
     <div class="container-fluid">
       <a class="navbar-brand d-flex align-items-center" href="/">
-        <img src="/static/images/readfolio_logo..png" alt="ReadFolio Logo" class="me-2">
+        <img src="/static/images/readfolio_logo..png" alt="ReadFolio Logo" class="me-2" style="max-height: 50px;">
       </a>
-      <div class="collapse navbar-collapse">
-    <ul class="navbar-nav ms-auto">
-      {% if user.is_authenticated %}
-        <li class="nav-item nav-link">Hello, {{ user.first_name }}</li>
-        <li class="nav-item"><a class="nav-link" href="/">Home</a></li>
-        <li class="nav-item"><a class="nav-link" href="/about/">About</a></li>
-        <li class="nav-item"><a class="nav-link" href="{% url 'book_list' %}">My Books</a></li>
-        <li class="nav-item"><a class="nav-link" href="{% url 'review_list' %}">My Reviews</a></li>
-        <li class="nav-item"><a class="nav-link" href="{% url 'account_logout' %}">Logout</a></li>
-      {% else %}
-        <li class="nav-item"><a class="nav-link" href="/">Home</a></li>
-        <li class="nav-item"><a class="nav-link" href="/about/">About</a></li>
-        <li class="nav-item"><a class="nav-link" href="{% url 'account_signup' %}">Sign Up</a></li>
-        <li class="nav-item"><a class="nav-link" href="{% url 'account_login' %}">Log In</a></li>
-      {% endif %}
-    </ul>
-  </div>
+
+      <!-- Mobile Toggler -->
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <!-- Collapsible nav -->
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav ms-auto mb-2 mb-lg-0 align-items-lg-center">
+          {% if user.is_authenticated %}
+          <li class="nav-item nav-link">Hello, {{ user.first_name }}</li>
+          <li class="nav-item"><a class="nav-link" href="/">Home</a></li>
+          <li class="nav-item"><a class="nav-link" href="/about/">About</a></li>
+          <li class="nav-item"><a class="nav-link" href="{% url 'book_list' %}">My Books</a></li>
+          <li class="nav-item"><a class="nav-link" href="{% url 'review_list' %}">My Reviews</a></li>
+          <li class="nav-item"><a class="nav-link" href="{% url 'account_logout' %}">Logout</a></li>
+          {% else %}
+          <li class="nav-item"><a class="nav-link" href="/">Home</a></li>
+          <li class="nav-item"><a class="nav-link" href="/about/">About</a></li>
+          <li class="nav-item"><a class="nav-link" href="{% url 'account_signup' %}">Sign Up</a></li>
+          <li class="nav-item"><a class="nav-link" href="{% url 'account_login' %}">Log In</a></li>
+          {% endif %}
+        </ul>
+      </div>
     </div>
   </nav>
 
-  <!-- Block Content for different pages-->
-  <div class="container mt-4">
+  <!-- Confirmation messages -->
+  {% if messages %}
+  <div class="container mt-3">
+    {% for message in messages %}
+    <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+      {{ message }}
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+    {% endfor %}
+  </div>
+  {% endif %}
+
+  <!-- Page Content -->
+  <div class="container mt-4 mb-5">
     {% block content %}{% endblock %}
   </div>
 
+  <!-- Bootstrap Bundle with JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+  <!-- Review Toggle Script -->
+  {% block scripts %}
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      const toggles = document.querySelectorAll('.toggle-review');
+      toggles.forEach(toggle => {
+        toggle.addEventListener('click', function (e) {
+          e.preventDefault();
+          const cardText = this.closest('.card-text');
+          const short = cardText.querySelector('.short-review');
+          const full = cardText.querySelector('.full-review');
+          const fullText = full.querySelector('.full-text');
+          short.style.display = 'none';
+          fullText.innerText = this.dataset.full;
+          full.style.display = 'inline';
+        });
+      });
+
+      const hideLinks = document.querySelectorAll('.show-less');
+      hideLinks.forEach(link => {
+        link.addEventListener('click', function (e) {
+          e.preventDefault();
+          const cardText = this.closest('.card-text');
+          const short = cardText.querySelector('.short-review');
+          const full = cardText.querySelector('.full-review');
+          full.style.display = 'none';
+          short.style.display = 'inline';
+        });
+      });
+    });
+  </script>
+  {% endblock %}
+
 </body>
 
-<!-- Pagination JS Script-->
-{% block scripts %}
-<script>
-  document.addEventListener('DOMContentLoaded', function () {
-    const toggles = document.querySelectorAll('.toggle-review');
-
-    toggles.forEach(toggle => {
-      toggle.addEventListener('click', function (e) {
-        e.preventDefault();
-        const cardText = this.closest('.card-text');
-        const short = cardText.querySelector('.short-review');
-        const full = cardText.querySelector('.full-review');
-        const fullText = full.querySelector('.full-text');
-
-        short.style.display = 'none';
-        fullText.innerText = this.dataset.full;
-        full.style.display = 'inline';
-      });
-    });
-
-    const hideLinks = document.querySelectorAll('.show-less');
-
-    hideLinks.forEach(link => {
-      link.addEventListener('click', function (e) {
-        e.preventDefault();
-        const cardText = this.closest('.card-text');
-        const short = cardText.querySelector('.short-review');
-        const full = cardText.querySelector('.full-review');
-
-        full.style.display = 'none';
-        short.style.display = 'inline';
-      });
-    });
-  });
-</script>
-{% endblock %}
+</html>

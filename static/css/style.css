@@ -1,18 +1,13 @@
-
-
-
-    /* Base.html styling */
+/* Base.html styling */
 
 /* Navbar */
 .custom-navbar {
   background-color: #fbfdfe !important;
 }
 
-
 .navbar-nav .nav-link:hover {
   color: #5e17eb !important;
 }
-
 
 .navbar-nav .nav-link.active {
   font-weight: bold;
@@ -31,7 +26,6 @@ body, .nav-link, .card-text, .navbar-brand {
   font-weight: 400;
 }
 
-/* Headings and card titles */
 .card-title {
   font-weight: 800;
 }
@@ -58,13 +52,11 @@ h1, h2, h3, h4, h5 {
   box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
 }
 
-
 .about-text {
   font-size: 1.2rem; 
   line-height: 1.8; 
   max-width: 100%;
 }
-
 
 .about-text h1 {
   font-size: 2.5rem;
@@ -75,8 +67,8 @@ h1, h2, h3, h4, h5 {
   margin-bottom: 1.25rem;
 }
 
-/* General styling  */
 
+/* General styling */
 body {
   font-family: 'Quicksand', sans-serif;
   background-color: #fbfdfe;
@@ -106,8 +98,7 @@ h1, h2, h3, h4, .card-title {
 }
 
 
-/* Form styling - add/edit books or reviews*/
-
+/* Form styling - add/edit books or reviews */
 form label {
   font-weight: 500;
   color: #333;
@@ -125,7 +116,6 @@ form label {
   font-weight: 500;
 }
 
-
 .card-title-detail {
   font-size: 2rem;
   color: #5e17eb;
@@ -140,4 +130,165 @@ textarea {
   border-radius: 0.5rem;
   border: 1px solid #ccc;
   resize: vertical;
+}
+
+
+/* ------------------------------- */
+/* 🌐 RESPONSIVE MEDIA QUERIES     */
+/* ------------------------------- */
+
+/* 🟥 XS: Extra Small Devices (phones <576px) */
+@media (max-width: 575.98px) {
+  h1, h2, h3 {
+    font-size: 1.4rem;
+    text-align: center;
+  }
+
+  .navbar-brand img {
+    height: 40px;
+  }
+
+  .btn {
+    font-size: 0.9rem;
+    padding: 0.4rem 0.75rem;
+  }
+
+  .about-text {
+    font-size: 0.9rem;
+    padding: 0 0.5rem;
+    text-align: center;
+  }
+
+  .about-text h1 {
+    font-size: 1.8rem;
+  }
+
+  .about-img {
+    width: 100%;
+    margin-bottom: 1rem;
+  }
+
+  .form-control,
+  .form-select {
+    font-size: 0.9rem;
+  }
+
+  textarea {
+    font-size: 0.9rem;
+    padding: 0.75rem;
+  }
+
+  .card-title-detail {
+    font-size: 1.4rem;
+  }
+
+  .container,
+  .container-fluid {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+}
+
+/* 🟧 SM: Small Devices (phones ≥576px and <768px) */
+@media (min-width: 576px) and (max-width: 767.98px) {
+  h1, h2, h3 {
+    font-size: 1.6rem;
+    text-align: center;
+  }
+
+  .btn {
+    font-size: 1rem;
+    padding: 0.5rem 1rem;
+  }
+
+  .about-text {
+    font-size: 1rem;
+    padding: 0 1rem;
+  }
+
+  .about-text h1 {
+    font-size: 2rem;
+  }
+
+  .card-title-detail {
+    font-size: 1.6rem;
+    text-align: center;
+  }
+
+  textarea {
+    font-size: 1rem;
+  }
+}
+
+/* 🟨 MD: Medium Devices (tablets ≥768px and <992px) */
+@media (min-width: 768px) and (max-width: 991.98px) {
+  h1, h2, h3 {
+    font-size: 1.8rem;
+  }
+
+  .about-text {
+    font-size: 1.1rem;
+  }
+
+  .about-text h1 {
+    font-size: 2.2rem;
+  }
+
+  .about-img {
+    width: 90%;
+  }
+
+  .btn {
+    font-size: 1rem;
+  }
+
+  textarea {
+    font-size: 1rem;
+  }
+}
+
+/* 🟩 LG: Large Devices (desktops ≥992px and <1200px) */
+@media (min-width: 992px) and (max-width: 1199.98px) {
+  h1, h2, h3 {
+    font-size: 2rem;
+  }
+
+  .about-text {
+    font-size: 1.15rem;
+  }
+
+  .about-text h1 {
+    font-size: 2.4rem;
+  }
+
+  .btn {
+    font-size: 1.05rem;
+  }
+
+  textarea {
+    font-size: 1.05rem;
+  }
+}
+
+/* 🟦 XL: Extra Large Devices (≥1200px) */
+@media (min-width: 1200px) {
+  h1, h2, h3 {
+    font-size: 2.2rem;
+  }
+
+  .about-text {
+    font-size: 1.2rem;
+  }
+
+  .about-text h1 {
+    font-size: 2.5rem;
+  }
+
+  .btn {
+    font-size: 1.1rem;
+  }
+
+  textarea {
+    font-size: 1.1rem;
+  }
 }

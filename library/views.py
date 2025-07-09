@@ -1,8 +1,10 @@
 from django.shortcuts import render, redirect
+from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import get_object_or_404
 from .models import Book, Review
 from .forms import ReviewForm, BookForm
+
 
 
 # Book CRUD, list, and details 
@@ -24,6 +26,7 @@ def book_create(request):
             book = form.save(commit=False)
             book.user = request.user
             book.save()
+            messages.success(request, "Book added successfully!")
             return redirect('book_list')
     else:
         form = BookForm()
@@ -49,6 +52,7 @@ def book_update(request, pk):
         form = BookForm(request.POST, instance=book)
         if form.is_valid():
             form.save()
+            messages.success(request, "Book updated successfully!")
             return redirect('book_list')
     else:
         form = BookForm(instance=book)
@@ -62,6 +66,7 @@ def book_delete(request, pk):
 
     if request.method == 'POST':
         book.delete()
+        messages.success(request, "Book deleted.")
         return redirect('book_list')
 
     return render(request, 'library/book_confirm_delete.html', {'book': book})
@@ -89,6 +94,7 @@ def create_review(request, pk):
             review.book = book
             review.user = request.user
             review.save()
+            messages.success(request, "Review posted successfully!")
             return redirect('book_list')
     else:
         form = ReviewForm()
@@ -119,6 +125,7 @@ def review_update(request, pk):
         form = ReviewForm(request.POST, instance=review)
         if form.is_valid():
             form.save()
+            messages.success(request, "Review updated.")
             return redirect('review_detail', pk=review.pk)
     else:
         form = ReviewForm(instance=review)
@@ -136,6 +143,7 @@ def review_delete(request, pk):
 
     if request.method == 'POST':
         review.delete()
+        messages.success(request, "Review deleted.")
         return redirect('review_list')
 
     return render(request, 'library/review_confirm_delete.html', {'review': review})
