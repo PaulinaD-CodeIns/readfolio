@@ -74,3 +74,33 @@ h1, h2, h3, h4, h5 {
 .about-text p {
   margin-bottom: 1.25rem;
 }
+
+/* General styling  */
+
+body {
+  font-family: 'Quicksand', sans-serif;
+  background-color: #fbfdfe;
+  color: #333;
+}
+
+h1, h2, h3, h4, .card-title {
+  font-family: 'Roboto', sans-serif;
+  font-weight: bold;
+}
+
+.card {
+  transition: box-shadow 0.3s ease;
+}
+
+.card:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.btn-outline-primary:hover,
+.btn-outline-dark:hover,
+.btn-outline-danger:hover,
+.btn-success:hover {
+  background-color: #5e17eb;
+  color: white;
+  border-color: #5e17eb;
+}
