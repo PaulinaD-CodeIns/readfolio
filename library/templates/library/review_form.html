@@ -1,19 +1,25 @@
-{% extends "base.html" %}
+{% extends 'base.html' %}
 
 {% block content %}
-  <h2>Review: {{ book.title }}</h2>
-  <form method="post">
-    {% csrf_token %}
-    {% for field in form %}
-      <div style="margin-bottom: 10px;">
-        {{ field.label_tag }}
-        {{ field }}
-        {% if field.errors %}
-          <div style="color: red;">{{ field.errors }}</div>
-        {% endif %}
+<div class="container mt-5" style="max-width: 700px;">
+  <div class="card shadow p-4">
+    <h2 class="text-center mb-4" style="font-family: 'Quicksand Bold', sans-serif; color: #5e17eb;">
+      {{ form.instance.pk|yesno:"Edit Review,Add a New Review" }}
+    </h2>
+
+    <form method="POST">
+      {% csrf_token %}
+      {{ form.as_p }}
+
+      <div class="d-flex justify-content-between mt-4">
+        <a href="{% url 'review_list' %}" class="btn btn-sm" style="background-color: #5e17eb; color: white;">
+          ← Back to Reviews
+        </a>
+        <button type="submit" class="btn" style="background-color: #5e17eb; color: white;">
+          Save Review
+        </button>
       </div>
-    {% endfor %}
-    <button type="submit">Submit Review</button>
-  </form>
-  <a href="{% url 'book_list' %}">Back to list</a>
+    </form>
+  </div>
+</div>
 {% endblock %}

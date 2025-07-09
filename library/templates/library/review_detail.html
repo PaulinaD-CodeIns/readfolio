@@ -1,17 +1,24 @@
 {% extends 'base.html' %}
 
-
 {% block content %}
-<h2>Review for "{{ review.book.title }}"</h2>
+<div class="container mt-5" style="max-width: 700px;">
+  <div class="card shadow p-4">
+    <h2 class="card-title" style="font-family: 'Quicksand Bold', sans-serif; color: #5e17eb;">
+      {{ review.book.title }} by {{ review.book.author }}
+    </h2>
+    <h6 class="text-muted">Rating: {{ review.rating }} / 5</h6>
+    <p class="card-text mt-3" style="font-family: 'Quicksand', sans-serif;">
+      {{ review.content|linebreaksbr }}
+    </p>
+    <p class="text-end text-muted fst-italic mt-4">
+      Posted on {{ review.created_at|date:"F j, Y" }}
+    </p>
 
-<p><strong>Rating:</strong> {{ review.rating }} / 5</p>
-<p><strong>Review:</strong> {{ review.content }}</p>
-<p><strong>Visibility:</strong> {{ review.is_public|yesno:"Public,Private" }}</p>
-
-{% if review.user == request.user %}
-<a href="{% url 'review_update' review.pk %}">Edit Review</a> |
-<a href="{% url 'review_delete' review.pk %}">Delete Review</a>
-{% endif %}
-
-<a href="{% url 'review_list' %}">Back to all reviews</a>
+    <div class="mt-4 d-flex justify-content-end">
+      <a href="{% url 'review_list' %}" class="btn btn-sm" style="background-color: #5e17eb; color: white;">
+        ← Back to Reviews
+      </a>
+    </div>
+  </div>
+</div>
 {% endblock %}

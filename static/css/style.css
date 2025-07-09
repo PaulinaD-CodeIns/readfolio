@@ -130,3 +130,14 @@ form label {
   font-size: 2rem;
   color: #5e17eb;
 }
+
+textarea {
+  min-height: 200px;
+  width: 100%;
+  font-family: 'Quicksand', sans-serif;
+  font-size: 1rem;
+  padding: 1rem;
+  border-radius: 0.5rem;
+  border: 1px solid #ccc;
+  resize: vertical;
+}

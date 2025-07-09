@@ -7,20 +7,24 @@ class ReviewForm(forms.ModelForm):
         fields = ['content', 'rating', 'is_public']
         widgets = {
             'content': forms.Textarea(attrs={
-                'rows': 4,
+                'rows': 10,
+                'style': 'width: 100%; font-size: 1rem; padding: 1rem; border-radius: 8px;',
                 'required': True,
                 'placeholder': 'Write your review here...'
             }),
             'rating': forms.NumberInput(attrs={
                 'min': 1,
                 'max': 5,
-                'required': True
+                'required': True,
+                'class': 'form-control',
             }),
             'is_public': forms.CheckboxInput(attrs={
-                'aria-label': 'Make this review public'
+                'aria-label': 'Make this review public',
+                'class': 'form-check-input',
             }),
         }
 
+        
 class BookForm(forms.ModelForm):
     class Meta:
         model = Book
