@@ -1,10 +1,33 @@
 {% extends "base.html" %}
 
 {% block content %}
+<div class="container my-5">
+  <div class="d-flex flex-column flex-lg-row align-items-center justify-content-between gap-4">
+    
+    <!-- Text Column -->
+    <div class="flex-fill about-text">
+      <h1 class="fw-bold">About ReadFolio</h1>
+      <p>
+        Once upon a time, a quiet bookworm got tired of forgetting what she read, what she loved, and how it all made her feel. That’s me. 🙋‍♀️
+        I grew up scribbling thoughts in the margins of novels and then... losing them. Books came and went, but my reflections? Vanished like plot twists.
+      </p>
+      <p>
+        Enter <strong>ReadFolio</strong> — your digital bookshelf meets journal. Here, you can track what you're reading, what you've finished, and what you want to dive into next. But more than that, it’s a space to leave a mark on the books that left a mark on you.
+      </p>
+      <p>
+        Write honest reviews — private if they’re just for you, public if you're feeling generous. No stars needed to be a guiding light for others. Whether your take is glowing, grumpy, or gloriously in-between, it's yours.
+      </p>
+      <p>
+        Think of ReadFolio as your own library of lived-through literature — where every finished book becomes a bookmark in your personal story.
+      </p>
+      <p class="fst-italic text-end mt-4">So don’t get lost in the pages — let ReadFolio be your map. 📖💜</p>
+    </div>
 
+    <!-- Image Column -->
+    <div class="flex-fill text-center">
+      <img src="/static/images/about_image.jpg" class="img-fluid rounded about-img" alt="Man smiling and holidng 3 books in a library">
+    </div>
 
-<h1>About ReadFolio</h1>
-<p>ReadFolio helps you track books and reflect on your reading journey.</p>
-
-
+  </div>
+</div>
 {% endblock %}
