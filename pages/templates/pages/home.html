@@ -1,11 +1,33 @@
 {% extends "base.html" %}
 
-
 {% block content %}
+<div class="container mt-5">
+  <h1 class="mb-4">Recent Public Reviews</h1>
 
-
-<h1>Welcome to ReadFolio</h1>
-<p>Discover what readers are saying about books.</p>
-
-
+  {% if public_reviews %}
+  {% for review in public_reviews %}
+  <div class="card mb-3 shadow-sm">
+    <div class="card-body">
+      <h5 class="card-title">{{ review.book.title }} by {{ review.book.author }}</h5>
+      <h6 class="card-subtitle mb-2 text-muted">Rating: {{ review.rating }} / 5</h6>
+      <p class="card-text">
+        <span class="short-review" style="display: inline;">
+          {{ review.content|truncatechars:300 }}
+          {% if review.content|length > 300 %}
+          <span class="fade-out">...</span>
+          <a href="#" class="toggle-review" data-full="{{ review.content|escapejs }}">Show more</a>
+          {% endif %}
+        </span>
+        <span class="full-review" style="display: none;">
+          <span class="full-text"></span>
+          <a href="#" class="show-less"> Show less</a>
+        </span>
+        <small class="text-muted">Posted on {{ review.created_at|date:"F j, Y" }}</small>
+    </div>
+  </div>
+  {% endfor %}
+  {% else %}
+  <p>No public reviews available yet.</p>
+  {% endif %}
+</div>
 {% endblock %}

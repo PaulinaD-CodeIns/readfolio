@@ -28,9 +28,44 @@
   </div>
 </nav>
 
+<!-- Block Content for different pages-->
     <div class="container mt-4">
         {% block content %}{% endblock %}
     </div>
-</body>
 
-</html>
+<!-- Pagination JS Script-->
+ {% block scripts %}
+    <script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const toggles = document.querySelectorAll('.toggle-review');
+
+    toggles.forEach(toggle => {
+      toggle.addEventListener('click', function (e) {
+        e.preventDefault();
+        const cardText = this.closest('.card-text');
+        const short = cardText.querySelector('.short-review');
+        const full = cardText.querySelector('.full-review');
+        const fullText = full.querySelector('.full-text');
+
+        short.style.display = 'none';
+        fullText.innerText = this.dataset.full;
+        full.style.display = 'inline';
+      });
+    });
+
+    const hideLinks = document.querySelectorAll('.show-less');
+
+    hideLinks.forEach(link => {
+      link.addEventListener('click', function (e) {
+        e.preventDefault();
+        const cardText = this.closest('.card-text');
+        const short = cardText.querySelector('.short-review');
+        const full = cardText.querySelector('.full-review');
+
+        full.style.display = 'none';
+        short.style.display = 'inline';
+      });
+    });
+  });
+</script>
+ {% endblock %}
