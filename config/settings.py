@@ -87,7 +87,7 @@ ACCOUNT_USERNAME_REQUIRED = False
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 
-
+APPEND_SLASH = True 
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
