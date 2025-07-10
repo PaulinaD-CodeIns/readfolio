@@ -31,7 +31,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.getenv('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.getenv('DEBUG','False') == 'False'
+DEBUG = os.getenv('DEBUG','False') == 'True'
 
 
 ALLOWED_HOSTS = ['.herokuapp.com', 'localhost', '127.0.0.1']
@@ -80,8 +80,7 @@ ACCOUNT_LOGOUT_REDIRECT_URL = '/'
 
 # Allauth Email Login Settings
 ACCOUNT_AUTHENTICATION_METHOD = 'email'
-ACCOUNT_EMAIL_REQUIRED = True
-ACCOUNT_USERNAME_REQUIRED = False
+ACCOUNT_SIGNUP_FIELDS = ["email*", "password1*", "password2*"]
 
 # Email Backend (for dev)
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
