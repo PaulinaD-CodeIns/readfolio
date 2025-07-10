@@ -17,7 +17,7 @@ import dj_database_url
 import logging
  
 
- 
+
 load_dotenv()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -31,7 +31,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.getenv('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.getenv('DEBUG','False') == 'False'
+DEBUG = os.getenv('DEBUG','False') == 'True'
 
 
 ALLOWED_HOSTS = ['.herokuapp.com', 'localhost', '127.0.0.1']
