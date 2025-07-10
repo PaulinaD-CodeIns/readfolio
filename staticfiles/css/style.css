@@ -134,10 +134,10 @@ textarea {
 
 
 /* ------------------------------- */
-/* 🌐 RESPONSIVE MEDIA QUERIES     */
+/* RESPONSIVE MEDIA QUERIES     */
 /* ------------------------------- */
 
-/* 🟥 XS: Extra Small Devices (phones <576px) */
+/* XS: Extra Small Devices (phones <576px) */
 @media (max-width: 575.98px) {
   h1, h2, h3 {
     font-size: 1.4rem;
@@ -189,7 +189,7 @@ textarea {
   }
 }
 
-/* 🟧 SM: Small Devices (phones ≥576px and <768px) */
+/* SM: Small Devices (phones ≥576px and <768px) */
 @media (min-width: 576px) and (max-width: 767.98px) {
   h1, h2, h3 {
     font-size: 1.6rem;
@@ -220,7 +220,7 @@ textarea {
   }
 }
 
-/* 🟨 MD: Medium Devices (tablets ≥768px and <992px) */
+/* MD: Medium Devices (tablets ≥768px and <992px) */
 @media (min-width: 768px) and (max-width: 991.98px) {
   h1, h2, h3 {
     font-size: 1.8rem;
@@ -247,7 +247,7 @@ textarea {
   }
 }
 
-/* 🟩 LG: Large Devices (desktops ≥992px and <1200px) */
+/* LG: Large Devices (desktops ≥992px and <1200px) */
 @media (min-width: 992px) and (max-width: 1199.98px) {
   h1, h2, h3 {
     font-size: 2rem;
@@ -270,7 +270,7 @@ textarea {
   }
 }
 
-/* 🟦 XL: Extra Large Devices (≥1200px) */
+/* XL: Extra Large Devices (≥1200px) */
 @media (min-width: 1200px) {
   h1, h2, h3 {
     font-size: 2.2rem;
