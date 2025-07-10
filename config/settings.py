@@ -36,28 +36,27 @@ ALLOWED_HOSTS = ['.herokuapp.com', 'localhost', '127.0.0.1']
 # Application definition
 
 INSTALLED_APPS = [
+    # Django built-ins
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
+    'django.contrib.sites',
     'django.contrib.staticfiles',
-
-    'django.contrib.sites',  # Required for allauth
 
     # Third-party apps
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
-    "crispy_forms",
-    "crispy_bootstrap5", 
+    'crispy_forms',
+    'crispy_bootstrap5', 
 
-    # Apps
+    # Your apps
     'library',
     'pages',
     'users',
 ]
-
 
 #AllAuth Settings:
 
@@ -72,12 +71,18 @@ AUTHENTICATION_BACKENDS = [
     'allauth.account.auth_backends.AuthenticationBackend',
 ]
 
+# Authentication Redirects
 LOGIN_REDIRECT_URL = '/'
 ACCOUNT_LOGOUT_REDIRECT_URL = '/'
-ACCOUNT_LOGIN_METHODS = {'email'}
-ACCOUNT_SIGNUP_FIELDS = ['email*', 'password1*', 'password2*']
 
+# Allauth Email Login Settings
+ACCOUNT_AUTHENTICATION_METHOD = 'email'
+ACCOUNT_EMAIL_REQUIRED = True
+ACCOUNT_USERNAME_REQUIRED = False
+
+# Email Backend (for dev)
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
 
 
 
@@ -117,9 +122,11 @@ WSGI_APPLICATION = 'config.wsgi.application'
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases
 
 DATABASES = {
-     'default': dj_database_url.config(default='sqlite:///db.sqlite3', conn_max_age=600)
+    'default': dj_database_url.config(
+        default='postgres://paulinadolder@localhost/readfolio',
+        conn_max_age=600,
+    )
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/5.2/ref/settings/#auth-password-validators
